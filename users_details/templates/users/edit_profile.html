@@ -1,0 +1,13 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="form-container">
+    <h2 class="form-title">Update Details</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ user_form|crispy }}
+        {{ details_form|crispy }}
+        <input type="submit" value="Submit" >
+    </form>
+</div>
+{% endblock %}

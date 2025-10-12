@@ -1,0 +1,50 @@
+{% extends "blog/base.html" %}
+
+{%block content%}
+ <main class="container">
+    <!-- Header -->
+
+    <header class="post-header">
+      <h1 class="post-title display-5 fw-bold mb-2">
+        <!-- Title goes here -->
+          {{blog_details.title}}
+      </h1>
+      <div class="post-meta d-flex flex-wrap align-items-center gap-3">
+        <span class="badge text-bg-light">
+          <!-- Author name -->
+          by <a href="{% url 'profile_page' blog_details.author.id %}">{{ blog_details.author.profiledetails.full_name }}</a>
+        </span>
+        <span class="text-muted">
+          <!-- Date posted -->
+          Posted on {{ blog_details.date }}
+        </span>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <article class="post-content mt-4">
+      <!-- Replace with your post HTML/content -->
+      <p>
+          {{blog_details.content}}
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.
+        Praesent libero. Sed cursus ante dapibus diam.
+      </p>
+    </article>
+
+    <!-- Actions -->
+    <div class="d-flex justify-content-between align-items-center mt-4 pt-3 border-top">
+        {% if 'profile/' not in request.META.HTTP_REFERER %}
+        <a href="{% url 'home_page' %}" class="btn btn-outline-secondary">← Back to Home Posts</a>
+        {%else%}
+        <a href="{% url 'profile_page' blog_details.author.id %}" class="btn btn-outline-secondary">← Back to Profile</a>
+        {%endif%}
+
+        {% if blog_details.author.id == user.id %}
+      <a href="{% url 'editpost_page' blog_details.id %}" class="btn btn-primary">Edit Post</a>
+        <a href="{% url 'deletepost_page' blog_details.id %}" class="btn btn-danger">Delete Post</a>
+        {% endif %}
+    </div>
+  </main>
+{%endblock%}

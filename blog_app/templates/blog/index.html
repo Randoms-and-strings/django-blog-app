@@ -1,0 +1,67 @@
+{% extends "blog/base.html" %}
+{% block title %}Blog Home{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Latest Posts</h1>
+<!--<div class="row">-->
+    <!-- Example Blog Post Card -->
+<!--{% for post in page_obj %}-->
+<!--    <div class="col-md-4 mb-4">-->
+<!--        <div class="card h-100">-->
+<!--            <img src="{{post.author.profiledetails.image.url}}" class="card-img-top rounded" alt="Post Title" style="width:50px; height:50px;">-->
+<!--            <div class="card-body">-->
+<!--                <h5 class="card-title">{{post.title}}</h5>-->
+<!--                <p class="card-text text-muted">{{post.subtitle}}</p>-->
+<!--                <a href="{% url 'postdetail_page' post.id %}">Read more....</a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    {% endfor %}-->
+
+
+{% for p_obj in page_obj %}
+<div class="container my-5">
+
+  <div class="row row-cols-1 row-cols-md-2 g-4">
+      <img src="{{p_obj.author.profiledetails.image.url}}" class="card-img-top-rounded" alt="Post Title" style="width:100px; height:100px; border-radius:50%;">
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">title: {{ p_obj.title }}</h5>
+          <p class="card-text text-muted mb-2">
+            <small>post by {{p_obj.author.profiledetails.full_name}} </small>
+          </p>
+          <p class="card-text">{{ p_obj.subtitle }}</p>
+          <a href="{% url 'postdetail_page' p_obj.id %}" class="btn btn-primary btn-sm">View</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+    <!-- Duplicate above div for more posts -->
+</div>
+<a href="{% url 'createpost_page' %}" class="btn btn-primary">Create Post</a>
+<hr>
+<div class="pagination">
+ <span class="step-links">
+     <span class="current">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+    </span>
+     <br>
+
+     {% if page_obj.has_previous %}
+         <a href="?page=1" style="">1</a>
+         <a href="?page={{ page_obj.previous_page_number }}"><</a>
+     {% endif %}
+
+
+     {% if page_obj.has_next %}
+         <a href="?page={{ page_obj.next_page_number }}">></a>
+        {% if page_obj.next_page_number != page_obj.paginator.num_pages %}
+         <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+        {% endif %}
+     {% endif %}
+ </span>
+     </div>
+{% endblock %}
