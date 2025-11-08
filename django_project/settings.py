@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-k!(crk1uyl(ea1n==cbp&%qa$o4hg!byx%=3&iw+#%-)-rys*7
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-
+CSRF_TRUSTED_ORIGINS = ["http://localhost:8080"]
 
 # Application definition
 
@@ -90,7 +90,7 @@ DATABASES = {
         'NAME': "testing-db",
         "USER": "postgres",
         "PASSWORD": "randoms&str1ngs",
-        "HOST": "db",
+        "HOST": "localhost",
         "PORT": "5432",
     }
 }
