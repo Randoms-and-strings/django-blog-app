@@ -30,6 +30,8 @@ services:
     depends_on:
       db:
         condition: service_started
+      elasticsearch:
+        condition: service_started
     volumes:
       - .:/blog-app
 
@@ -47,6 +49,33 @@ services:
         condition: service_started
 
 
+  elasticsearch:
+    container_name: ES
+    image: elasticsearch:9.2.0
+    ports:
+      - "9200:${ELASTIC_PORT}"
+    environment:
+      discovery.type: 'single-node'
+      xpack.security.enabled: 'true'
+      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+#      ES_JAVA_OPTS: '-Xmx2g -Xms2g
+    env_file:
+      - path: ./.env
+    mem_limit: 1g
+
+    volumes:
+      - C:/Users/ASUS/Downloads/elasticsearch-9.2.0-windows-x86_64/elasticsearch-9.2.0/config/elasticsearch.yml:\
+       /usr/share/elasticsearch/config/elasticsearch.yml
+      - elastic_data:/usr/share/elasticsearch/data
+      - elastic_users:/usr/share/elasticsearch/users
+      - elastic_users_roles:/usr/share/elasticsearch/users_roles
+      - C:/Users/ASUS/Downloads/elasticsearch-9.2.0-windows-x86_64/elasticsearch-9.2.0/config/roles.yml:\
+       /usr/share/elasticsearch/config/roles.yml
+
+
+
+
+
 
 #  webserver:
 #    image: nginx
@@ -60,4 +89,7 @@ services:
 
 volumes:
   djangoblog_data:
+  elastic_data:
+  elastic_users:
+  elastic_users_roles:
 

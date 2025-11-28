@@ -90,12 +90,12 @@ DATABASES = {
         'NAME': "testing-db",
         "USER": "postgres",
         "PASSWORD": "randoms&str1ngs",
-        "HOST": "localhost",
+        "HOST": "postgres_container",
         "PORT": "5432",
     }
 }
 
-
+#es kpapeWoBOoUT+Z3PP6Y_
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
@@ -134,7 +134,7 @@ STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
-LOGIN_URL = "/login/existing-user/"
+LOGIN_URL = "/user/existing-user/"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
