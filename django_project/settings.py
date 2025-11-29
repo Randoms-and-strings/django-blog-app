@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+load_dotenv()
 from django.conf.global_settings import MEDIA_ROOT, MEDIA_URL, LOGIN_URL
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -88,8 +90,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': "testing-db",
-        "USER": "postgres",
-        "PASSWORD": "randoms&str1ngs",
+        "USER": f"{os.getenv('POSTGRES_USER')}",
+        "PASSWORD": f"{os.getenv('POSTGRES_PASSWORD')}",
         "HOST": "localhost",
         "PORT": "5432",
     }

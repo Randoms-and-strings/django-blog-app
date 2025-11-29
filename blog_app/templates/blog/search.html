@@ -1,0 +1,144 @@
+{% extends 'blog/base.html' %}
+{% load custom_filters %}
+
+{% block title %}Blog Search{% endblock %}
+{% block style %}
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+select {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+    .search-container {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    input[type="text"] {
+      width: 70%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-left: 10px;
+      background-color: #0078d4;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #005fa3;
+    }
+
+    .results {
+      margin-top: 30px;
+    }
+
+    .result-item {
+      display: flex;
+      align-items: flex-start;
+      background-color: white;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .result-item img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 15px;
+      object-fit: cover;
+    }
+
+    .result-content {
+      text-align: left;
+    }
+
+    .result-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .result-subtitle {
+      font-size: 14px;
+      color: #666;
+      margin: 5px 0;
+    }
+
+
+    .result-snippet {
+      font-size: 14px;
+      color: #333;
+    }
+  {% endblock %}
+
+{% block search %}
+  <div class="search-container">
+    <h2>Search Blog Posts</h2>
+      <form id="searchForm" action="{% url 'search_page' %}" method="POST">
+        {% csrf_token %}
+      <select id="searchType" name="search_by">
+        <option value="title">Title</option>
+        <option value="author">Author</option>
+        <option value="any">Any Field</option>
+      </select>
+          <input type="text" placeholder="Enter keywords..." name="keyword" />
+    <button type="submit" value="OK">Search</button>
+      </form>
+
+      {% if request.method == "POST" %}
+
+    <div class="results">
+      <!-- Example result item -->
+
+
+
+
+
+        {% for items in data %}
+      <div class="result-item">
+        {#<img src="https://via.placeholder.com/50" alt="Profile" />#}
+        <div class="result-content">
+            <a href="{% url 'postdetail_page' items|getitem:'_id' %}" style="color:inherit;">
+          <p class="result-title">{{ items|getitem:"_source"|getitem:"title" }}</p>
+            </a>
+          <p class="result-subtitle">{{ items|getitem:"_source"|getitem:"subtitle" }}</p>
+          <p class="result-snippet"> {{ items|getitem:"_source"|getitem:"content" }}</p>
+
+        </div>
+      </div>
+        {% empty %}
+        <p><strong>There is no data available for that article</strong></p>
+        {% endfor %}
+
+    </div>
+
+      {% endif %}
+  </div>
+{% endblock %}

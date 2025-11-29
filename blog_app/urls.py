@@ -8,5 +8,5 @@ urlpatterns = [
     path("blog/edit_post/<int:post_id>/", views.edit_post_page, name="editpost_page"),
     path("blog/delete_post/<int:post_id>/", views.delete_post_page, name="deletepost_page"),
     path("blog/create_post/", views.create_post_page, name="createpost_page"),
-
+    path("search_blogs/", views.search_page, name="search_page"),
     ]
