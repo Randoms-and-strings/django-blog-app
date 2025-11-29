@@ -1,4 +1,5 @@
-
+FROM elasticsearch:9.2.0
+COPY ./roles.yml /usr/share/elasticsearch/config/roles.yml
 
 
 

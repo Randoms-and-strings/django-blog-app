@@ -1,0 +1,12 @@
+# The default roles file is empty as the preferred method of defining roles is
+# through the API/UI. File based roles are useful in error scenarios when the
+# API based roles may not be available.
+crud_role:
+  run_as: [ '' ]
+  cluster: [ 'monitor']
+  indices:
+    - names: [ '*' ]
+      privileges: [ 'read', 'create_doc', 'create_index', 'delete', 'delete_index', 'write', 'view_index_metadata' ]
+#      field_security:
+#        grant: ['category', '@timestamp', 'message' ]
+#      query: '{"match": {"category": "click"}}'

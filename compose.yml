@@ -20,11 +20,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
-#    command: >
-#      sh -c "python manage.py makemigrations &&
-#             python manage.py migrate &&
-#             python manage.py runserver 0.0.0.0:8000"
+#    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+    command: >
+      sh -c "python manage.py makemigrations &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
     ports:
       - "8000:8000"
     depends_on:
@@ -50,8 +50,10 @@ services:
 
 
   elasticsearch:
-    container_name: ES
-    image: elasticsearch:9.2.0
+    container_name: ES_django
+    build:
+      context: .
+      dockerfile: Dockerfile Elasticsearch
     ports:
       - "9200:${ELASTIC_PORT}"
     environment:
@@ -64,13 +66,11 @@ services:
     mem_limit: 1g
 
     volumes:
-      - C:/Users/ASUS/Downloads/elasticsearch-9.2.0-windows-x86_64/elasticsearch-9.2.0/config/elasticsearch.yml:\
-       /usr/share/elasticsearch/config/elasticsearch.yml
       - elastic_data:/usr/share/elasticsearch/data
       - elastic_users:/usr/share/elasticsearch/users
       - elastic_users_roles:/usr/share/elasticsearch/users_roles
-      - C:/Users/ASUS/Downloads/elasticsearch-9.2.0-windows-x86_64/elasticsearch-9.2.0/config/roles.yml:\
-       /usr/share/elasticsearch/config/roles.yml
+      - elastic_roles_yml_file:/usr/share/elasticsearch/roles.yml
+
 
 
 
@@ -92,4 +92,5 @@ volumes:
   elastic_data:
   elastic_users:
   elastic_users_roles:
+  elastic_roles_yml_file:
 
