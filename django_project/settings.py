@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-k!(crk1uyl(ea1n==cbp&%qa$o4hg!byx%=3&iw+#%-)-rys*7
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-CSRF_TRUSTED_ORIGINS = ["http://localhost:8080", "http://localhost:80"]
+CSRF_TRUSTED_ORIGINS = ["http://localhost:8080", "http://localhost:80", "*"] #purposely allowed all sites
 
 # Application definition
 
@@ -89,10 +89,10 @@ WSGI_APPLICATION = 'django_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': "testing-db",
+        'NAME': "testingdb_ru80",
         "USER": f"{os.getenv('POSTGRES_USER')}",
         "PASSWORD": f"{os.getenv('POSTGRES_PASSWORD')}",
-        "HOST": "postgres_container",
+        "HOST": "dpg-dahb3ijl550s73ebdru0-a",
         "PORT": "5432",
     }
 }
