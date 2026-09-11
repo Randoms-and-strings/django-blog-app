@@ -10,8 +10,9 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
-client = Elasticsearch(f"http://{os.getenv("ELASTIC_HOSTNAME_DOCKER")}:{os.getenv("ELASTIC_PORT")}",
-                       basic_auth=(os.getenv("ELASTIC_USER"), os.getenv("ELASTIC_PASSWORD")))
+# client = Elasticsearch(f"http://{os.getenv("ELASTIC_HOSTNAME_DOCKER")}:{os.getenv("ELASTIC_PORT")}",
+#                        basic_auth=(os.getenv("ELASTIC_USER"), os.getenv("ELASTIC_PASSWORD")))
+client = Elasticsearch(f"https://{os.getenv("ELASTIC_HOSTNAME_DOCKER")}:{os.getenv("ELASTIC_PORT")}")
 # Create your views here.
 
 def home_page(request):
