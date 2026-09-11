@@ -3,7 +3,7 @@ COPY --chown=1000:0 ./roles.yml /usr/share/elasticsearch/config/roles.yml
 COPY --chown=1000:0 ./elasticsearch.yml /usr/share/elasticsearch/config/elasticsearch.yml
 EXPOSE 9200
 USER 1000:0
-CMD ["docker.elastic.co/elasticsearch/elasticsearch:9.2.0"]
+CMD ["./bin/elasticsearch"]
 
 
 
