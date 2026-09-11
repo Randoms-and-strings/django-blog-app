@@ -59,6 +59,7 @@ network.host: 0.0.0.0
 # finds starting at 9200. Set a specific HTTP port here:
 #
 http.port: 9200
+discovery.type: single-node
 #
 # For more information, consult the network module documentation.
 #
